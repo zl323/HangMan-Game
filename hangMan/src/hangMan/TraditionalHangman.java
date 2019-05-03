@@ -24,21 +24,26 @@ public class TraditionalHangman extends Hangman {
 	@Override
 	public void makeGuess(char guess) {
 		// TODO Auto-generated method stub 
-		int numGuess = this.getGuessRemaining();
-		numGuess--;
-		this.setGuessRemaining(numGuess);
-		char[] wordArray = this.getWord().toCharArray();
-		if(this.getWord().indexOf(guess) != -1) {
-			for(int i = 0; i < this.getDisplayWord().length; i++) {
-				if(wordArray[i] == guess) {
-					this.getDisplayWord()[i] = guess;
-				}
-			}
-			this.GuessesMade(guess);
+		if(this.alreadyGuessed(guess)) {
+			System.out.println("You already guessed this letter. Please take another one");
+			return;
 		}else {
-			this.getIncorrectGuess().add(guess);
+			int numGuess = this.getGuessRemaining();
+			this.setGuessRemaining(numGuess);
+			char[] wordArray = this.getWord().toCharArray();
+			if(this.getWord().indexOf(guess) != -1) {
+				for(int i = 0; i < this.getDisplayWord().length; i++) {
+					if(wordArray[i] == guess) {
+						this.getDisplayWord()[i] = guess;
+					}
+				}
+				this.GuessesMade(guess);
+			}else {
+				this.getIncorrectGuess().add(guess);
+				numGuess--;
+				this.setGuessRemaining(numGuess);
+			}
 		}
-		
 	}
 
 }

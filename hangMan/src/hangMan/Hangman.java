@@ -78,7 +78,11 @@ public abstract class Hangman {
 	public abstract void makeGuess(char guess);
 	
 	public boolean alreadyGuessed(char guess) {
-		return guessedLetter.contains(guess)? true:false;
+		if(guessedLetter.contains(guess) || incorrectGuess.contains(guess)) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void GuessesMade(char guess) {

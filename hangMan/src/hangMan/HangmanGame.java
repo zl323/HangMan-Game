@@ -16,11 +16,11 @@ public class HangmanGame {
 	public Hangman hangmanSetting(ArrayList<String> cleanList) {
 		Random random = new Random();
 		int choice = random.nextInt(1);
-		//if(choice == 1) {
-			//return new TraditionalHangman(cleanList);
-		//}else {
+		if(choice == 1) {
+			return new TraditionalHangman(cleanList);
+		}else {
 			return new EvilHangman(cleanList);
-		//}
+		}
 	}
 	// solve duplicate input
 	public void initializeGame() {
@@ -44,7 +44,7 @@ public class HangmanGame {
 					gameMode.print();
 					System.out.print("Guess a Letter :");
 					String guess = scanner.nextLine().toLowerCase();
-					while(guess.isEmpty()) {
+					while(!guess.matches("^[a-zA-Z]*$")||guess.isEmpty()) {
 						System.out.print("Please re-Enter. Guess a Letter :");
 						guess = scanner.nextLine().toLowerCase();
 					}
