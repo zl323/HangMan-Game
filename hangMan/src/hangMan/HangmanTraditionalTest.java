@@ -38,6 +38,12 @@ class HangmanTraditionalTest {
 	void testGetGuessRemaining() {
 		//not guess yet
 		assertEquals(8,gameTest.getGuessRemaining());
+		// guessed correct
+		gameTest.makeGuess('e');
+		assertEquals(8,gameTest.getGuessRemaining());
+		// guessed incorrect
+		gameTest.makeGuess('c');
+		assertEquals(7,gameTest.getGuessRemaining());
 	}
 
 	/**
@@ -97,9 +103,14 @@ class HangmanTraditionalTest {
 	 */
 	@Test
 	void testGetIncorrectGuess() {
+		// make incorrect guess
 		gameTest.makeGuess('c');
 		ArrayList<Character> testList = new ArrayList<>();
 		testList.add('c');
+		assertEquals(testList,gameTest.getIncorrectGuess());
+		
+		// make correct guess, 'e' shouldn't be added to the incorrect guess list
+		gameTest.makeGuess('e');
 		assertEquals(testList,gameTest.getIncorrectGuess());
 	}
 
@@ -108,7 +119,9 @@ class HangmanTraditionalTest {
 	 */
 	@Test
 	void testAlreadyGuessed() {
+		//haven't made a guess before
 		assertFalse(gameTest.alreadyGuessed('c'));
+		//after making a guess
 		gameTest.makeGuess('c');
 		assertTrue(gameTest.alreadyGuessed('c'));
 		
@@ -119,9 +132,27 @@ class HangmanTraditionalTest {
 	 */
 	@Test
 	void testGuessesMade() {
+		//any guess hasn't been made yet
 		assertFalse(gameTest.alreadyGuessed('a'));
+		//made a guess
 		gameTest.GuessesMade('a');
 		assertTrue(gameTest.alreadyGuessed('a'));
+	}
+	
+	/**
+	 * Test method for {@link hangMan.Hangman#getGuessedLetter()}.
+	 */
+	@Test
+	void testGetGuessedLetter() {
+		// make incorrect guess
+		ArrayList<Character> testList = new ArrayList<>();
+		gameTest.makeGuess('c');
+		testList.add('c');
+		assertEquals(testList,gameTest.getGuessedLetter());
+		// make correct guess
+		gameTest.makeGuess('e');
+		testList.add('e');
+		assertEquals(testList,gameTest.getGuessedLetter());
 	}
 
 	/**
@@ -129,10 +160,13 @@ class HangmanTraditionalTest {
 	 */
 	@Test
 	void testGetDisplayWord() {
+		//initial guessed situation
 		char[] testDisp = {'_','_','_','_','_'};
 		assertTrue(Arrays.equals(testDisp, gameTest.getDisplayWord()));
+		//after taking a guess of 'c', which is incorrect, doesn't change the current word display
 		gameTest.makeGuess('c');
 		assertTrue(Arrays.equals(testDisp, gameTest.getDisplayWord()));
+		//after taking a guess of 'e', which is correct, change the current word display
 		gameTest.makeGuess('e');
 		testDisp[4] = 'e';
 		assertTrue(Arrays.equals(testDisp, gameTest.getDisplayWord()));

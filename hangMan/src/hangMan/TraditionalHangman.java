@@ -32,6 +32,7 @@ public class TraditionalHangman extends Hangman {
 		}else {
 			int numGuess = this.getGuessRemaining();
 			this.setGuessRemaining(numGuess);
+			this.GuessesMade(guess);
 			char[] wordArray = this.getWord().toCharArray();
 			if(this.getWord().indexOf(guess) != -1) {
 				for(int i = 0; i < this.getDisplayWord().length; i++) {
@@ -39,12 +40,12 @@ public class TraditionalHangman extends Hangman {
 						this.getDisplayWord()[i] = guess;
 					}
 				}
-				this.GuessesMade(guess);
 			}else {
 				this.getIncorrectGuess().add(guess);
 				numGuess--;
 				this.setGuessRemaining(numGuess);
 			}
+
 		}
 	}
 

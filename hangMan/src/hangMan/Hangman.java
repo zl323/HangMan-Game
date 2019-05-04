@@ -105,7 +105,7 @@ public abstract class Hangman {
 	}
 	
 	/**
-	 * @return the incorrect guess wordlist
+	 * @return the incorrect guessed character list
 	 */
 	public ArrayList<Character> getIncorrectGuess() {
 		return this.incorrectGuess;
@@ -136,6 +136,13 @@ public abstract class Hangman {
 		if(!alreadyGuessed(guess)) {
 			guessedLetter.add(guess);
 		}
+	}
+	
+	/**
+	 * @return the guessed guess character list
+	 */
+	public ArrayList<Character> getGuessedLetter() {
+		return this.guessedLetter;
 	}
 	
 	/**
