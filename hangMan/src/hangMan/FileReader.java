@@ -19,6 +19,9 @@ public class FileReader {
 		this.filename = filename;
 	}
 
+	public String getFileName() {
+		return this.filename;
+	}
 	/**
 	 * read content in a file and clean content line by line
 	 * example : "    hello world    " -> "hello world"
