@@ -12,6 +12,7 @@ import java.util.*;
 public class EvilHangman extends Hangman {
 
 	/**
+	 * constructor of Evil Hangman
 	 * @param wordList
 	 */
 	public EvilHangman(ArrayList<String> wordList) {
@@ -28,7 +29,13 @@ public class EvilHangman extends Hangman {
 		this.setGuessRemaining(guess+2);
 	}
 
-	/* (non-Javadoc)
+	/* check if the guessed letter has already been guessed before, if it has, return void
+	 * Otherwise, record the guessed letter and group the wordList with the guess
+	 * Then find the largest set of the current guess family so that users have less chance to get the correct guess
+	 * Update the largest set to wordList instance variable, update the chosen word in the set
+	 * Next, check if used make the right guess. If the guess is correct, update displayWord array
+	 * else, number of remaining guess - 1, add incorrect guess to the incorrect list
+	 * 
 	 * @see hangMan.Hangman#makeGuess(char)
 	 */
 	@Override
@@ -72,7 +79,7 @@ public class EvilHangman extends Hangman {
 				}
 			}
 			
-			// set the largest set to 
+			// set the largest set to wordList instance variable
 			this.setWordList(new ArrayList<String>(maxSet));
 			this.setWord(randomWord());
 			if(currDisplay.equals(new String(this.getDisplayWord()))) {

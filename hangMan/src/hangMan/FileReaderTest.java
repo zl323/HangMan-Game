@@ -31,6 +31,7 @@ class FileReaderTest {
 	 */
 	@Test
 	void testFileReader() {
+		// test filename
 		assertEquals(filename, fileTest.getFileName());
 	}
 
@@ -39,6 +40,7 @@ class FileReaderTest {
 	 */
 	@Test
 	void testGetFileName() {
+		// test get filename
 		assertEquals("wordTest.txt", fileTest.getFileName());
 	}
 	/**
@@ -46,6 +48,7 @@ class FileReaderTest {
 	 */
 	@Test
 	void testGetCleanContent() {
+		// test text file exists
 		ArrayList<String> testList = new ArrayList<>();
 		testList.add("apple");
 		testList.add("tree");
@@ -53,6 +56,10 @@ class FileReaderTest {
 		ArrayList<String> wordList = new ArrayList<>();
 		wordList = fileTest.getCleanContent();
 		assertEquals(testList,wordList);
+		// test text file doesn't exist
+		FileReader testList2 = new FileReader("fake.txt");
+		ArrayList<String> wordList2 = new ArrayList<>();
+		wordList2 = testList2.getCleanContent();
 	}
 
 	/**
