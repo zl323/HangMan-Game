@@ -3,6 +3,8 @@
  */
 package hangMan;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +15,19 @@ import org.junit.jupiter.api.Test;
  *
  */
 class HangmanEvilTest {
+	
+	Hangman evilGameTest;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
+		ArrayList<String> wordList = new ArrayList<>();
+		wordList.add("apple");
+		wordList.add("hinge");
+		wordList.add("froze");
+		evilGameTest = new EvilHangman(wordList);
 	}
 
 	/**
@@ -26,7 +35,7 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGetGuessRemaining() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(10,evilGameTest.getGuessRemaining());
 	}
 
 	/**
@@ -34,7 +43,8 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testSetGuessRemaining() {
-		fail("Not yet implemented"); // TODO
+		evilGameTest.setGuessRemaining(8);
+		assertEquals(8,evilGameTest.getGuessRemaining());
 	}
 
 	/**
@@ -42,7 +52,12 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGetWordList() {
-		fail("Not yet implemented"); // TODO
+		Set<String> testList = new HashSet<>();
+		testList.add("apple");
+		testList.add("hinge");
+		testList.add("froze");
+		
+		assertEquals(testList,new HashSet<String>(evilGameTest.getWordList()));
 	}
 
 	/**
@@ -50,7 +65,12 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testSetWordList() {
-		fail("Not yet implemented"); // TODO
+		ArrayList<String> testList = new ArrayList<>();
+		testList.add("play");
+		testList.add("junk");
+		testList.add("bell");
+		evilGameTest.setWordList(testList);
+		assertEquals(testList,evilGameTest.getWordList());
 	}
 
 	/**
@@ -58,7 +78,7 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGetWord() {
-		fail("Not yet implemented"); // TODO
+		assertTrue("apple".equals(evilGameTest.getWord())||"hinge".equals(evilGameTest.getWord())||"forze".equals(evilGameTest.getWord()));
 	}
 
 	/**
@@ -66,7 +86,8 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testSetWord() {
-		fail("Not yet implemented"); // TODO
+		evilGameTest.setWord("paper");
+		assertEquals("paper",evilGameTest.getWord());
 	}
 
 	/**
@@ -74,15 +95,10 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGetIncorrectGuess() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link hangMan.Hangman#makeGuess(char)}.
-	 */
-	@Test
-	void testMakeGuess() {
-		fail("Not yet implemented"); // TODO
+		evilGameTest.makeGuess('c');
+		ArrayList<Character> testList = new ArrayList<>();
+		testList.add('c');
+		assertEquals(testList,evilGameTest.getIncorrectGuess());
 	}
 
 	/**
@@ -90,7 +106,9 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testAlreadyGuessed() {
-		fail("Not yet implemented"); // TODO
+		assertFalse(evilGameTest.alreadyGuessed('c'));
+		evilGameTest.makeGuess('c');
+		assertTrue(evilGameTest.alreadyGuessed('c'));
 	}
 
 	/**
@@ -98,7 +116,9 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGuessesMade() {
-		fail("Not yet implemented"); // TODO
+		assertFalse(evilGameTest.alreadyGuessed('a'));
+		evilGameTest.GuessesMade('a');
+		assertTrue(evilGameTest.alreadyGuessed('a'));
 	}
 
 	/**
@@ -106,7 +126,13 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testGetDisplayWord() {
-		fail("Not yet implemented"); // TODO
+		char[] testDisp = {'_','_','_','_','_'};
+		assertTrue(Arrays.equals(testDisp, evilGameTest.getDisplayWord()));
+		evilGameTest.makeGuess('c');
+		assertTrue(Arrays.equals(testDisp, evilGameTest.getDisplayWord()));
+		evilGameTest.makeGuess('e');
+		testDisp[4] = 'e';
+		assertTrue(Arrays.equals(testDisp, evilGameTest.getDisplayWord()));
 	}
 
 	/**
@@ -114,7 +140,11 @@ class HangmanEvilTest {
 	 */
 	@Test
 	void testSetDisplayWord() {
-		fail("Not yet implemented"); // TODO
+		char[] testDisp = {'_','_','_','_','_'};
+		assertTrue(Arrays.equals(testDisp, evilGameTest.getDisplayWord()));
+		char[] testDisp2 = {'_','_','_','_','e'};
+		evilGameTest.setDisplayWord(testDisp2);
+		assertTrue(Arrays.equals(testDisp2, evilGameTest.getDisplayWord()));
 	}
 
 }
